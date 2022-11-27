@@ -15,6 +15,9 @@ class Meals(models.Model):
     slug = models.SlugField(blank=True, null=True)
 
     def save(self , *args , **kwargs):
+        """
+        If the slug field is empty, then populate it with the slugified version of the name field
+        """
         if not self.slug and self.name :
             self.slug = slugify(self.name)
         super(Meals , self).save(*args , **kwargs)
